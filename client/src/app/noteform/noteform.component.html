@@ -1,0 +1,19 @@
+<form (submit)="onSubmit()" #noteForm="ngForm">
+	<label>Name: 
+		<input type="text" name="name" required [(ngModel)]="note.name" #name="ngModel" minlength="3">
+		<span class="invalid" *ngIf="name.dirty && name.invalid">Name must be at least 3 chars.</span>
+	</label>
+	<label>Notes: 
+		<input type="text" name="text" required minlength="3" [(ngModel)]="note.text" #text="ngModel">
+		<span class="invalid" *ngIf="text.dirty && text.invalid">Comment must be at least 3 chars.</span>
+	</label>
+	<input type="submit" name="submit" value="Add Note" [disabled]="noteForm.invalid">
+</form>
+{{note | json}}
+
+<div>
+	<fieldset *ngFor='let note of notes'>
+		<h5>{{ note.name }}</h5>
+		<p>{{ note.text }}</p>
+	</fieldset>
+</div>
